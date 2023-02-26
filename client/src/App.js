@@ -19,7 +19,7 @@ const authLink = setContext((_, {headers}) => {
   }
 });
 
-//middleware pre-request to endpoint
+// //middleware pre-request to endpoint
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()
@@ -29,21 +29,19 @@ function App() {
   return (
     <ApolloProvider client ={client}>
     <Router>
-      <>
         <Navbar />
-        <Switch>
+        <Routes>
           <Route 
             exact path='/' 
-            component={SearchBooks}/>
+            element={<SearchBooks/>}/>
           <Route 
             exact path='/saved' 
-            component={SavedBooks}/>
+            element={<SavedBooks/>}/>
           <Route 
-            render={() => <h1 className='display-2'>Wrong page!</h1>}/>
-        </Switch>
-      </>
+            element={<h1 className='display-2'>Wrong page!</h1>}/>
+        </Routes>
     </Router>
-    </ApolloProvider>
+     </ApolloProvider>
   );
 }
 
